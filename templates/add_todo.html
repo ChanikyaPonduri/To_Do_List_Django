@@ -1,0 +1,16 @@
+{% extends 'todo_base.html' %}
+
+{% block title %}Add Task{% endblock %}
+
+{% block content %}
+<h2>Add New Task</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Task title" required>
+    <textarea name="description" placeholder="Description (optional)"></textarea>
+    <button type="submit">Add Task</button>
+</form>
+
+<a class="back-link" href="{% url 'home' %}">Back to Home</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'todo_base.html' %}
+
+{% block title %}My Tasks{% endblock %}
+
+{% block content %}
+<h2>My Tasks</h2>
+
+<div style="text-align: center; margin-bottom: 20px;">
+    <a href="{% url 'add_todo' %}">
+        <button>Add New Task</button>
+    </a>
+</div>
+
+<div class="filters">
+    <a href="?filter=all">All</a> |
+    <a href="?filter=completed">Completed</a> |
+    <a href="?filter=pending">Not Completed</a>
+</div>
+
+<ul>
+    {% for todo in todos %}
+        <li class="task-card">
+            <div class="{% if todo.completed %}completed{% endif %}">
+                <div class="task-title">{{ todo.title }}</div>
+                <div>{{ todo.description }}</div>
+            </div>
+
+            <div class="task-actions">
+                <a href="{% url 'edit_todo' todo.id %}">Edit</a>
+                <a href="{% url 'delete_todo' todo.id %}">Delete</a>
+            </div>
+        </li>
+    {% empty %}
+        <li>No tasks found</li>
+    {% endfor %}
+</ul>
+{% endblock %}
